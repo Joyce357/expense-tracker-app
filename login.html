@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Expense Tracker 💸</title>
+    <link rel="stylesheet" href="login.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">Expense Tracker 💸</div>
+
+      <div class="card">
+        <div class="auth-tabs">
+          <button class="auth-tab active" data-tab="login">Login</button>
+          <button class="auth-tab" data-tab="register">Register</button>
+        </div>
+
+        <div id="alert" class="alert"></div>
+
+        <div id="login-form" class="auth-form active">
+          <form id="login-form-element">
+            <div class="form-group">
+              <label for="login-email">Email</label>
+              <input
+                type="email"
+                id="login-email"
+                class="form-control"
+                placeholder="your@email.com"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="login-password">Password</label>
+              <input
+                type="password"
+                id="login-password"
+                class="form-control"
+                placeholder="••••••••"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+          </form>
+        </div>
+
+        <div id="register-form" class="auth-form">
+          <form id="register-form-element">
+            <div class="form-group">
+              <label for="register-name">Your Name</label>
+              <input
+                type="text"
+                id="register-name"
+                class="form-control"
+                placeholder="Brown Code"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="register-email">Email</label>
+              <input
+                type="text"
+                id="register-email"
+                class="form-control"
+                placeholder="your@email.com"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="register-password">Password</label>
+              <input
+                type="password"
+                id="register-password"
+                class="form-control"
+                placeholder="••••••••"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        //Elements
+        const authTabs = document.querySelectorAll(".auth-tab");
+        const authForms = document.querySelectorAll(".auth-form");
+        const loginForm = document.getElementById("login-form-element");
+        const registerForm = document.getElementById("register-form-element");
+        const alertBox = document.getElementById("alert");
+
+        //Check if user is already logged in
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        if (currentUser) {
+          //redirect to main app
+          window.location.href = "index.html";
+        }
+
+        //Tab switching
+        authTabs.forEach((tab) => {
+          tab.addEventListener("click", () => {
+            //remove active class from all tabs and forms
+            authTabs.forEach((t) => t.classList.remove("active"));
+            authForms.forEach((f) => f.classList.remove("active"));
+
+            //add active tabs to clicked tab and corresponding form
+            tab.classList.add("active");
+            const formId = tab.getAttribute("data-tab") + "-form";
+            document.getElementById(formId).classList.add("active");
+
+            //Hide any alert
+            hideAlert();
+          });
+        });
+
+        //Register Form Submission
+
+        registerForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          const name = document.getElementById("register-name").value.trim();
+          const email = document.getElementById("register-email").value.trim();
+          const password = document.getElementById("register-password").value;
+
+          //Get existing users or create empty array
+
+          const users = JSON.parse(localStorage.getItem("users")) || [];
+
+          //check if email already exist
+
+          if (users.some((user) => user.email === email)) {
+            showAlert("Email already registered", "danger");
+            return;
+          }
+
+          //Create new user
+
+          const newUser = {
+            id: Date.now(),
+            name,
+            email,
+            password,
+            profilePic: "",
+            avatarLetter: name.charAt(0).toUpperCase(),
+          };
+
+          //Add to users array
+          users.push(newUser);
+
+          //save to localStorage
+          localStorage.setItem("users", JSON.stringify(users));
+          localStorage.setItem("currentUser", JSON.stringify(newUser));
+
+          showAlert("Registration Successful! Redirecting...", "success");
+
+          //Redirect to main app after a short delay
+          setTimeout(() => {
+            window.location.href = "index.html";
+          }, 1500);
+        });
+
+        //Login form submission
+        loginForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          const email = document.getElementById("login-email").value.trim();
+          const password = document.getElementById("login-password").value;
+
+          //Get users from localStorage
+          const users = JSON.parse(localStorage.getItem("users")) || [];
+
+          //Find user with matching email and password
+          const user = users.find(
+            (u) => u.email === email && u.password === password
+          );
+
+          if (user) {
+            //save current user to localStorage
+            localStorage.setItem("currentUser", JSON.stringify(user));
+
+            showAlert("Login successful! Redirecting...", "success");
+
+            //Redirect to main app after a short delay
+            setTimeout(() => {
+              window.location.href = "index.html";
+            }, 1500);
+          } else {
+            showAlert("Invalid email or password", "danger");
+          }
+        });
+
+        //Helper Functions
+        function showAlert(message, type) {
+          alertBox.textContent = message;
+          alertBox.className = `alert alert-${type}`;
+          alertBox.style.display = "block";
+        }
+
+        function hideAlert() {
+          alertBox.style.display = "none";
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <header class="app-header">
+        <h1>Expense Tracker 💸</h1>
+
+        <div class="user-profile">
+          <span class="user-name"
+            >Welcome, <span id="username">Roxy</span>
+          </span>
+          <button id="logout-btn" class="btn-logout">Logout</button>
+          <div class="user-avatar" id="avatar-container">
+            <span id="avatar-letter">R</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="dashboard">
+        <div class="card summary-card">
+          <div class="summary-header">
+            <h2>Monthly Summary</h2>
+            <span>May 2025</span>
+          </div>
+          <div class="total-amount">$1,250.00</div>
+          <p>Total expenses this month</p>
+          <button class="btn btn-primary" id="toggle-form">
+            + Add Expenses
+          </button>
+        </div>
+        <div class="card chart-card">
+          <h2>Expenses by Category</h2>
+          <div class="chart-container">
+            <div class="pie-chart" id="pie-chart"></div>
+            <div class="chart-legend">
+              <div class="legend-item">
+                <div
+                  class="legend-color"
+                  style="background-color: var(--primary)"
+                ></div>
+                <span>Food (30%)</span>
+              </div>
+              <div class="legend-item">
+                <div
+                  class="legend-color"
+                  style="background-color: var(--secondary)"
+                ></div>
+                <span>Transport (25%)</span>
+              </div>
+              <div class="legend-item">
+                <div
+                  class="legend-color"
+                  style="background-color: var(--warning)"
+                ></div>
+                <span>Rent (15%)</span>
+              </div>
+              <div class="legend-item">
+                <div
+                  class="legend-color"
+                  style="background-color: var(--info)"
+                ></div>
+                <span>Other (30%)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="expense-form-card" style="display: none" class="card">
+        <form id="expense-form">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" id="description" class="form-control" required />
+          </div>
+          <div class="form-group">
+            <label for="amount">Amount</label>
+            <input
+              type="number"
+              id="amount"
+              class="form-control"
+              step="0.01"
+              min="0"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category" class="form-control" required>
+              <option value="Food">Food</option>
+              <option value="Transport">Transport</option>
+              <option value="Rent">Rent</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="expense-date">Date</label>
+            <input
+              type="date"
+              id="expense-date"
+              class="form-control"
+              required
+            />
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save Expense</button>
+            <button type="button" id="cancel-expense" class="btn">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div
+        id="date-range-picker"
+        class="card"
+        style="display: none; margin-bottom: 20px"
+      >
+        <h3>Select Date Range</h3>
+        <div class="date-range-form">
+          <div class="form-group">
+            <label for="start-date">Start Date</label>
+            <input type="date" id="start-date" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="end-date">End Date</label>
+            <input type="date" id="end-date" class="form-control" />
+          </div>
+          <button id="apply-date-range" class="btn btn-primary">Apply</button>
+        </div>
+      </div>
+
+      <div class="expenses-list">
+        <div class="expenses-header">
+          <h2>Recent Expenses</h2>
+          <div class="filter-container">
+            <select class="filter-select">
+              <option>All Categories</option>
+              <option>Food</option>
+              <option>Transport</option>
+              <option>Rent</option>
+              <option>Entertainment</option>
+            </select>
+            <select class="filter-select" data-filter="period">
+              <option>This Month</option>
+              <option>Last Month</option>
+              <option>Last 3 Months</option>
+              <option>Custom Range</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="card">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>May 20, 2025</td>
+                <td><span class="category-badge food">Food</span></td>
+                <td>Grocery shopping</td>
+                <td>$85.50</td>
+                <td>
+                  <div class="action-buttons">
+                    <div class="btn-icon btn-edit">✏️</div>
+                    <div class="btn-icon btn-delete">🗑️</div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>May 19, 2025</td>
+                <td><span class="category-badge transport">Transport</span></td>
+                <td>Uber ride</td>
+                <td>$24.75</td>
+                <td>
+                  <div class="action-buttons">
+                    <div class="btn-icon btn-edit">✏️</div>
+                    <div class="btn-icon btn-delete">🗑️</div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div id="toast" class="toast"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
