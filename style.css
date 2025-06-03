@@ -622,6 +622,7 @@ input[type="date"] {
 
   .navbar .container {
     padding: 15px 20px;
+    flex-wrap: nowrap;
   }
 
   .navbar-nav {
@@ -645,7 +646,7 @@ input[type="date"] {
 
   .nav-item {
     margin: 10px 0;
-    width: 100px;
+    width: 100%;
   }
 
   .nav-link {
