@@ -1,4 +1,18 @@
 document.addEventListener('DOMContentLoaded', function () {
+  const setActiveNavLink = () => {
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const navLink = document.querySelectorAll('.nav-link');
+
+    navLink.forEach(link => {
+      const linkHref = link.getAttribute('href');
+      if (linkHref === currentPage) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  };
+
   // Check if user is logged in
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
   if (!currentUser) {
@@ -872,4 +886,54 @@ document.addEventListener('DOMContentLoaded', function () {
     
     pie.style.background = `conic-gradient(${segments.join(', ')})`;
   }
+
+  const userMenu = document.querySelector('.user-menu');
+  const dropdownMenu = document.querySelector('.dropdown-menu');
+
+  if (userMenu && dropdownMenu) {
+    let isDropdownOpen = false;
+
+    userMenu.addEventListener('click', function(e) {
+      if (!isDropdownOpen) {
+        dropdownMenu.style.display = 'block';
+        dropdownMenu.style.opacity = '1';
+        dropdownMenu.style.visibility = 'visible';
+        isDropdownOpen = true;
+      } else {
+        // Only close if clicking on the avatar, not the dropdown itself
+        if (e.target.closest('.dropdown-menu') === null) {
+          dropdownMenu.style.display = 'none';
+          dropdownMenu.style.opacity = '0';
+          dropdownMenu.style.visibility = 'hidden';
+          isDropdownOpen = false;
+        }
+      }
+    });
+
+    //close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!userMenu.contains(e.target) && isDropdownOpen) {
+        dropdownMenu.style.display = 'none';
+        dropdownMenu.style.opacity = '0';
+        dropdownMenu.style.visibility = 'hidden';
+        isDropdownOpen = false;
+      }
+    });
+
+    //prevent dropdown from closing when clicking inside it
+    dropdownMenu.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+
+    //make sure logout button work
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', function() {
+        // Your existing logout code
+        localStorage.removeItem('currentUser');
+        window.location.href = 'login.html';
+      });
+    }
+  }
+
 });

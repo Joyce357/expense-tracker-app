@@ -3,26 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Expense Tracker</title>
+    <title>Expense Tracker 💸</title>
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
-    <div class="container">
-      <header class="app-header">
-        <h1>Expense Tracker 💸</h1>
-
-        <div class="user-profile">
-          <span class="user-name"
-            >Welcome, <span id="username">Roxy</span>
-          </span>
-          <button id="logout-btn" class="btn-logout">Logout</button>
-          <div class="user-avatar" id="avatar-container">
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="container">
+        
+        <a href="index.html" class="navbar-brand">
+          <span class="logo-icon">💸</span> Expense Tracker
+        </a>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a href="index.html" class="nav-link active">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a href="about.html" class="nav-link">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="blog.html" class="nav-link">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a href="contact.html" class="nav-link">Contact</a>
+          </li>
+        </ul>
+        <div class="user-menu">
+          <div class="avatar">
             <span id="avatar-letter">R</span>
           </div>
+          <div class="dropdown-menu">
+            <span id="username">User</span>
+            <button id="logout-btn" class="btn-logout">Logout</button>
+          </div>
         </div>
-      </header>
+      </div>
+    </nav>
 
+    <div class="container">
       <div class="dashboard">
         <div class="card summary-card">
           <div class="summary-header">

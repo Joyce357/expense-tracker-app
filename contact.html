@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Expense Tracker 💸</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .contact-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    /*.page-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .page-header h1 {
+      color: var(--primary);
+      margin-bottom: 10px;
+      font-size: 32px;
+      text-align: center;
+    }
+    
+    .page-header p {
+      color: var(--dark);
+      font-size: 18px;
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }*/
+
+    .contact-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    
+    .form-group.full-width {
+      grid-column: span 2;
+    }
+    
+    .form-group textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+    
+    .contact-info {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    
+    .contact-card {
+      text-align: center;
+      padding: 20px;
+      background-color: var(--light);
+      border-radius: 8px;
+    }
+    
+    .contact-card i {
+      font-size: 24px;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    
+    .contact-card h3 {
+      margin-bottom: 10px;
+      color: var(--dark);
+    }
+    
+    .contact-card p {
+      color: var(--gray);
+    }
+    
+    .submit-btn {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 500;
+      transition: background-color 0.3s;
+      width: 100%;
+    }
+    
+    .submit-btn:hover {
+      background-color: var(--primary-light);
+    }
+    
+    @media (max-width: 768px) {
+      .contact-form {
+        grid-template-columns: 1fr;
+      }
+      
+      .form-group.full-width {
+        grid-column: span 1;
+      }
+      
+      .contact-info {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">
+        <span class="logo-icon">💸</span> Expense Tracker
+      </a>
+      <ul class="navbar-nav">
+        <li class="nav-item"><a href="index.html" class="nav-link">Dashboard</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+        <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link active">Contact</a></li>
+      </ul>
+      <div class="user-menu">
+        <div class="avatar">
+          <span id="avatar-letter">U</span>
+        </div>
+        <div class="dropdown-menu">
+          <span id="username">User</span>
+          <button id="logout-btn" class="btn-logout">Logout</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="contact-container">
+      <div class="page-header">
+        <h1>Contact Us</h1>
+        <p>Have questions or feedback? <br> We'd love to hear from you!</p>
+      </div>
+      
+      <div class="card">
+        <form id="contact-form" class="contact-form">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" class="form-control" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" class="form-control" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="phone">Phone (Optional)</label>
+            <input type="tel" id="phone" name="phone" class="form-control">
+          </div>
+          
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <select id="subject" name="subject" class="form-control">
+              <option value="general">General Inquiry</option>
+              <option value="support">Technical Support</option>
+              <option value="feedback">Feedback</option>
+              <option value="feature">Feature Request</option>
+            </select>
+          </div>
+          
+          <div class="form-group full-width">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" class="form-control" required></textarea>
+          </div>
+          
+          <div class="form-group full-width">
+            <button type="submit" class="submit-btn">Send Message</button>
+          </div>
+        </form>
+      </div>
+      
+      <div class="contact-info">
+        <div class="contact-card">
+          <i>📧</i>
+          <h3>Email</h3>
+          <p>support@expensetracker.com</p>
+        </div>
+        
+        <div class="contact-card">
+          <i>📞</i>
+          <h3>Phone</h3>
+          <p>+1 (555) 123-4567</p>
+        </div>
+        
+        <div class="contact-card">
+          <i>📍</i>
+          <h3>Address</h3>
+          <p>123 Finance Street<br>Budget City, BC 10101</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Contact form submission
+      const contactForm = document.getElementById('contact-form');
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          // Get form values
+          const name = document.getElementById('name').value;
+          const email = document.getElementById('email').value;
+          const subject = document.getElementById('subject').value;
+          const message = document.getElementById('message').value;
+          
+          
+          // Get current user
+          const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+          
+          // Create a message object to store in localStorage
+          const contactMessage = {
+            id: Date.now(),
+            name,
+            email,
+            subject,
+            message,
+            date: new Date().toISOString(),
+            user: currentUser ? currentUser.email : 'anonymous'
+          };
+          
+          // Get existing messages or create empty array
+          const messages = JSON.parse(localStorage.getItem('contactMessages')) || [];
+          
+          // Add new message
+          messages.push(contactMessage);
+          
+          // Save to localStorage
+          localStorage.setItem('contactMessages', JSON.stringify(messages));
+          
+          // Show success message
+          showToast('Message sent successfully! We\'ll get back to you soon.');
+          
+          // Reset form
+          contactForm.reset();
+        });
+      }
+      
+      // Toast notification function
+      function showToast(message, duration = 3000) {
+        const toast = document.getElementById('toast');
+        if (!toast) return;
+        
+        toast.textContent = message;
+        toast.classList.add('show');
+        
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, duration);
+      }
+    });
+  </script>
+</body>
+</html>

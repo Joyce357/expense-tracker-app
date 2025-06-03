@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog - Expense Tracker 💸</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .blog-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /*.page-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    
+    .page-header p {
+      color: var(--dark);
+      font-size: 18px;
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }*/
+    
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    
+    .blog-card {
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+    
+    .blog-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .blog-image {
+      height: 200px;
+      background-color: var(--light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+    }
+    
+    .blog-content {
+      padding: 20px;
+    }
+    
+    .blog-category {
+      display: inline-block;
+      padding: 5px 10px;
+      background-color: var(--light);
+      color: var(--primary);
+      border-radius: 20px;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+    
+    .blog-title {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: var(--dark);
+    }
+    
+    .blog-excerpt {
+      color: var(--gray);
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+    
+    .blog-meta {
+      display: flex;
+      justify-content: space-between;
+      color: var(--gray);
+      font-size: 14px;
+      border-top: 1px solid var(--light);
+      padding-top: 15px;
+    }
+    
+    .blog-post {
+      background-color: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+    }
+    
+    .blog-post-header {
+      margin-bottom: 20px;
+    }
+    
+    .blog-post-title {
+      font-size: 28px;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    
+    .blog-post-meta {
+      display: flex;
+      justify-content: space-between;
+      color: var(--gray);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    
+    .blog-post-content {
+      line-height: 1.8;
+      color: var(--dark);
+    }
+    
+    .blog-post-content p {
+      margin-bottom: 20px;
+    }
+    
+    .blog-post-content h3 {
+      color: var(--primary);
+      margin: 30px 0 15px;
+    }
+    
+    .blog-post-content ul {
+      margin-bottom: 20px;
+      padding-left: 20px;
+    }
+    
+    .blog-post-content li {
+      margin-bottom: 10px;
+    }
+    
+    .back-to-blogs {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    .back-to-blogs:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">
+        <span class="logo-icon">💸</span> Expense Tracker
+      </a>
+      <ul class="navbar-nav">
+        <li class="nav-item"><a href="index.html" class="nav-link">Dashboard</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+        <li class="nav-item"><a href="blog.html" class="nav-link active">Blog</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="user-menu">
+        <div class="avatar">
+          <span id="avatar-letter">U</span>
+        </div>
+        <div class="dropdown-menu">
+          <span id="username">User</span>
+          <button id="logout-btn" class="btn-logout">Logout</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="blog-container">
+      <!-- Blog List View -->
+      <div id="blog-list-view">
+        <div class="page-header">
+          <h1>Financial Insights Blog</h1>
+          <p>Tips, tricks, and strategies to improve your financial health</p>
+        </div>
+        
+        <div class="blog-grid">
+          <!-- Blog Card 1 -->
+          <div class="blog-card" data-blog-id="1">
+            <div class="blog-image" style="background-color: #e0e7ff;">
+              💸
+            </div>
+            <div class="blog-content">
+              <span class="blog-category">Budgeting</span>
+              <h2 class="blog-title">5 Simple Steps to Create a Budget That Actually Works</h2>
+              <p class="blog-excerpt">Learn how to create a realistic budget that you can actually stick to with these practical tips.</p>
+              <div class="blog-meta">
+                <span>May 25, 2025</span>
+                <span>5 min read</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Blog Card 2 -->
+          <div class="blog-card" data-blog-id="2">
+            <div class="blog-image" style="background-color: #d1fae5;">
+              📊
+            </div>
+            <div class="blog-content">
+              <span class="blog-category">Saving</span>
+              <h2 class="blog-title">The 50/30/20 Rule: Simplify Your Financial Life</h2>
+              <p class="blog-excerpt">Discover how the 50/30/20 budgeting rule can help you balance necessities, wants, and savings.</p>
+              <div class="blog-meta">
+                <span>May 18, 2025</span>
+                <span>4 min read</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Blog Card 3 -->
+          <div class="blog-card" data-blog-id="3">
+            <div class="blog-image" style="background-color: #fef3c7;">
+              🏠
+            </div>
+            <div class="blog-content">
+              <span class="blog-category">Housing</span>
+              <h2 class="blog-title">Rent vs. Buy: Making the Right Housing Decision</h2>
+              <p class="blog-excerpt">Analyze the pros and cons of renting versus buying a home based on your financial situation.</p>
+              <div class="blog-meta">
+                <span>May 10, 2025</span>
+                <span>7 min read</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Blog Card 4 -->
+          <div class="blog-card" data-blog-id="4">
+            <div class="blog-image" style="background-color: #dbeafe;">
+              📱
+            </div>
+            <div class="blog-content">
+              <span class="blog-category">Technology</span>
+              <h2 class="blog-title">Top 10 Apps to Help You Save Money in 2025</h2>
+              <p class="blog-excerpt">Explore the best mobile apps that can help you track expenses, find deals, and grow your savings.</p>
+              <div class="blog-meta">
+                <span>May 5, 2025</span>
+                <span>6 min read</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Blog Card 5 -->
+          <div class="blog-card" data-blog-id="5">
+            <div class="blog-image" style="background-color: #dcfce7;">
+              🌱
+            </div>
+            <div class="blog-content">
+              <span class="blog-category">Investing</span>
+              <h2 class="blog-title">Investing for Beginners: Start Growing Your Wealth Today</h2>
+              <p class="blog-excerpt">Learn the basics of investing and how to start building wealth even with a small amount of money.</p>
+              <div class="blog-meta">
+                <span>April 28, 2025</span>
+                <span>8 min read</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Blog Card 6 -->
+          <div class="blog-card" data-blog-id="6">
+            <div class="blog-image" style="background-color: #fee2e2;">
+              🛒
+            </div>
+            <div class="blog-content">
+              <span class="blog-category">Shopping</span>
+              <h2 class="blog-title">Smart Shopping: How to Save Money on Everyday Purchases</h2>
+              <p class="blog-excerpt">Discover practical strategies to reduce your spending on groceries, clothing, and other essentials.</p>
+              <div class="blog-meta">
+                <span>April 20, 2025</span>
+                <span>5 min read</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Blog Post View -->
+      <div id="blog-post-view" style="display: none;">
+        <a href="#" class="back-to-blogs" id="back-to-blogs">← Back to all articles</a>
+        
+        <div class="blog-post card">
+          <div class="blog-post-header">
+            <h1 class="blog-post-title">5 Simple Steps to Create a Budget That Actually Works</h1>
+            <div class="blog-post-meta">
+              <span>By John Smith</span>
+              <span>May 25, 2025</span>
+            </div>
+          </div>
+          
+          <div class="blog-post-content">
+            <p>Creating a budget is one thing, but sticking to it is another challenge entirely. Many people create detailed budgets only to abandon them within weeks. The key to a successful budget isn't just about crunching numbers—it's about creating a realistic plan that aligns with your lifestyle and financial goals.</p>
+            
+            <p>In this article, we'll walk through five simple steps to create a budget that you can actually maintain over the long term.</p>
+            
+            <h3>1. Track Your Current Spending</h3>
+            <p>Before you can create an effective budget, you need to understand where your money is currently going. Use the Expense Tracker app to record all your expenses for at least one month. Categorize each expense and look for patterns in your spending habits.</p>
+            <p>This step is crucial because it gives you a realistic picture of your financial habits. Many people underestimate how much they spend in certain categories, especially on small, frequent purchases like coffee or dining out.</p>
+            
+            <h3>2. Identify Your Financial Goals</h3>
+            <p>A budget without purpose is just a list of restrictions. Define what you're trying to achieve with your budget:</p>
+            <ul>
+              <li>Are you saving for a down payment on a house?</li>
+              <li>Do you want to pay off credit card debt?</li>
+              <li>Are you building an emergency fund?</li>
+              <li>Are you saving for retirement or your children's education?</li>
+            </ul>
+            <p>Having clear goals will help you stay motivated when budgeting gets challenging.</p>
+            
+            <h3>3. Use the 50/30/20 Rule as a Starting Point</h3>
+            <p>The 50/30/20 rule provides a simple framework for allocating your income:</p>
+            <ul>
+              <li><strong>50% for needs:</strong> Essential expenses like housing, utilities, groceries, and transportation</li>
+              <li><strong>30% for wants:</strong> Non-essential spending like dining out, entertainment, and hobbies</li>
+              <li><strong>20% for savings and debt repayment:</strong> Building your emergency fund, investing, and paying down debt</li>
+            </ul>
+            <p>This rule is flexible—you can adjust the percentages based on your personal situation and financial goals.</p>
+            
+            <h3>4. Choose a Budgeting Method That Fits Your Personality</h3>
+            <p>There's no one-size-fits-all approach to budgeting. Consider these popular methods:</p>
+            <ul>
+              <li><strong>Zero-based budgeting:</strong> Give every dollar a job until your income minus expenses equals zero</li>
+              <li><strong>Envelope system:</strong> Allocate cash to different spending categories using physical envelopes</li>
+              <li><strong>Pay yourself first:</strong> Automatically transfer money to savings before budgeting the rest</li>
+              <li><strong>50/30/20 budget:</strong> Allocate by needs, wants, and savings as described above</li>
+            </ul>
+            <p>The best budgeting method is the one you'll actually stick with, so choose based on your preferences and habits.</p>
+            
+            <h3>5. Review and Adjust Regularly</h3>
+            <p>A budget isn't a set-it-and-forget-it tool. Schedule monthly budget reviews to assess your progress and make necessary adjustments. Life changes, income fluctuates, and priorities shift—your budget should evolve accordingly.</p>
+            <p>During your review, ask yourself:</p>
+            <ul>
+              <li>Did I stay within my budget categories?</li>
+              <li>If not, why? Were my allocations unrealistic, or did unexpected expenses arise?</li>
+              <li>Am I making progress toward my financial goals?</li>
+              <li>Do I need to adjust any categories for next month?</li>
+            </ul>
+            <p>This regular review process helps you refine your budget over time, making it increasingly effective and sustainable.</p>
+            
+            <h3>Conclusion</h3>
+            <p>Creating a budget that works isn't about perfection—it's about progress. By tracking your spending, setting clear goals, using a flexible framework, choosing the right method, and reviewing regularly, you'll develop a budget that helps you take control of your finances rather than feeling controlled by them.</p>
+            <p>Remember that budgeting is a skill that improves with practice. Be patient with yourself, celebrate small wins, and keep refining your approach until you find what works for you.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
+
+  <script>
+     document.addEventListener('DOMContentLoaded', function() {
+        // Blog functionality
+        const blogCards = document.querySelectorAll('.blog-card');
+        const blogListView = document.getElementById('blog-list-view');
+        const blogPostView = document.getElementById('blog-post-view');
+        const backToBlogsBtn = document.getElementById('back-to-blogs');
+
+        //Blog post data
+        const blogPosts = {
+            1: {
+                title: "5 Simple Steps to Create a Budget That Actually Works",
+                author: "John Smith",
+                date: "May 25 2025",
+                category: "Budgeting",
+                content: document.querySelector('.blog-post-content').innerHTML
+            },
+            2: {
+                title: "The 50/30/20 Rule: Simplify Your Financial Life",
+                author: "Sarah Johnson",
+                date: "May 18, 2025",
+                category: "Saving",
+                content: ` 
+                 <p>Managing your money doesn't have to be complicated. The 50/30/20 rule offers a straightforward approach to budgeting that can help anyone take control of their finances without getting lost in the details.</p>
+
+                 <p>This budgeting method, popularized by Senator Elizabeth Warren in her book "All Your Worth: The Ultimate Lifetime Money Plan," divides your after-tax income into three simple categories: needs, wants, and savings/debt repayment.</p>
+
+                 <h3>Understanding the 50/30/20 Rule</h3>
+                 <ul>
+                   <li><strong>50% to Needs:</strong> These are essential expenses you can't avoid—housing, utilities, groceries, transportation, minimum debt payments, and insurance.</li>
+                   <li><strong>30% to Wants:</strong> These are non-essential expenses that enhance your lifestyle—dining out, entertainment, hobbies, subscriptions, and vacations.</li>
+                   <li><strong>20% to Savings and Debt Repayment:</strong> This portion goes toward building your financial future—emergency fund, retirement accounts, investments, and paying down debt beyond minimum payments.</li> 
+                 </ul>
+
+                 <h3>Why the 50/30/20 Rule Works</h3>
+                 <p>This budgeting approach is effective for several reasons:</p>
+                 <ul>
+                    <li><strong>Simplicity:</strong> With just three categories to track, you avoid the tedious task of monitoring dozens of specific budget lines.</li>
+                    <li><strong>Flexibility:</strong> Within each category, you have freedom to adjust spending as needed without reworking your entire budget.</li>
+                    <li><strong>Balance:</strong> It acknowledges that both financial responsibility (needs and savings) and quality of life (wants) are important.</li>
+                    <li><strong>Sustainability:</strong> By allowing room for enjoyment while prioritizing necessities and future goals, it creates a budget you can maintain long-term.</li>
+                 </ul>
+
+                 <h3>Implementing the 50/30/20 Rule</h3>
+                 <p>Follow these steps to apply this budgeting method to your finances:</p>
+
+                 <h3>Step 1: Calculate Your After-Tax Income</h3>
+                 <p>Start with your take-home pay—what remains after taxes and mandatory deductions. If you're self-employed, subtract your estimated tax payments from your gross income.</p>
+        
+                 <h3>Step 2: Calculate Your Category Limits</h3>
+                 <p>Multiply your after-tax income by 0.5, 0.3, and 0.2 to determine your spending limits for needs, wants, and savings/debt repayment, respectively.</p>
+        
+                 <h3>Step 3: Track Your Spending</h3>
+                 <p>Use the Expense Tracker app to categorize your expenses and see how your actual spending compares to the 50/30/20 targets.</p>
+        
+                 <h3>Step 4: Make Adjustments</h3>
+                 <p>If your current spending doesn't align with the recommended percentages, identify areas where you can make changes:</p>
+                 <ul>
+                    <li>If you're spending more than 50% on needs, consider downsizing your housing, refinancing loans, or finding ways to reduce essential costs.</li>
+                    <li>If wants exceed 30%, look for less expensive alternatives or eliminate subscriptions and services you rarely use.</li>
+                    <li>If you're saving less than 20%, try automating transfers to savings accounts on payday before you have a chance to spend the money.</li>
+                 </ul>
+
+                 <h3>Conclusion</h3>
+                 <p>The 50/30/20 rule provides a simple framework that can help you balance current needs, lifestyle choices, and future financial security. By focusing on these broad categories rather than micromanaging every expense, you can create a sustainable budget that guides your financial decisions without dominating your life.</p>
+                 <p>Remember that budgeting is personal—the right approach is the one that helps you meet your financial goals while still enjoying your life along the way.</p>
+                `
+            },
+            3: {
+                title: "Rent vs. Buy: Making the Right Housing Decision",
+                author: "Michael Chen",
+                date: "May 10, 2025",
+                category: "Housing",
+                content: ` 
+                  <p>The decision to rent or buy a home is one of the most significant financial choices you'll make. While conventional wisdom often suggests that buying is always better than renting, the reality is more nuanced. The right choice depends on your financial situation, lifestyle preferences, and long-term goals.</p>
+        
+                  <p>In this article, we'll explore the factors you should consider when deciding whether to rent or buy, helping you make an informed decision that aligns with your personal circumstances.</p>
+        
+                  <h3>Financial Considerations</h3>
+        
+                  <h3>1. Upfront Costs</h3>
+                  <p><strong>Renting:</strong> Typically requires first and last month's rent plus a security deposit—usually equivalent to 1-3 months of rent.</p>
+                  <p><strong>Buying:</strong> Requires a down payment (typically 3-20% of the home price), closing costs (2-5%), and moving expenses. This can amount to tens of thousands of dollars upfront.</p>
+        
+                  <h3>2. Ongoing Costs</h3>
+                  <p><strong>Renting:</strong> Monthly rent, renter's insurance, and sometimes utilities. Costs are predictable and maintenance is the landlord's responsibility.</p>
+                  <p><strong>Buying:</strong> Mortgage payment, property taxes, homeowner's insurance, utilities, maintenance, and repairs. The rule of thumb is to budget 1-4% of your home's value annually for maintenance and repairs.</p>
+        
+                  <h3>3. Equity Building</h3>
+                  <p><strong>Renting:</strong> No equity building; your monthly payments don't contribute to ownership.</p>
+                  <p><strong>Buying:</strong> Each mortgage payment builds equity in your home, creating a form of forced savings.</p>
+        
+                  <h3>4. Investment Potential</h3>
+                  <p><strong>Renting:</strong> Frees up capital that could be invested elsewhere, potentially generating higher returns than real estate in some markets.</p>
+                  <p><strong>Buying:</strong> Home value may appreciate over time, but returns vary widely by location and economic conditions. Real estate isn't always the best investment.</p>
+        
+                  <h3>Lifestyle Considerations</h3>
+        
+                  <h3>1. Flexibility</h3>
+                  <p><strong>Renting:</strong> Offers flexibility to relocate when your lease ends without the burden of selling a property.</p>
+                  <p><strong>Buying:</strong> Creates roots in a community but makes moving more complicated and potentially costly.</p>
+        
+                  <h3>2. Customization</h3>
+                  <p><strong>Renting:</strong> Limited ability to customize or renovate the space.</p>
+                  <p><strong>Buying:</strong> Freedom to renovate, decorate, and modify your home to suit your preferences.</p>
+        
+                  <h3>3. Stability</h3>
+                  <p><strong>Renting:</strong> Subject to rent increases and the possibility of having to move if the landlord sells or doesn't renew your lease.</p>
+                  <p><strong>Buying:</strong> Provides stability with fixed-rate mortgages and protection from rising housing costs (though property taxes and insurance may increase).</p>
+        
+                  <h3>Conclusion</h3>
+                  <p>The rent vs. buy decision isn't simply about what you can afford—it's about what makes the most sense for your financial goals and lifestyle preferences. Neither option is inherently better; the right choice depends on your individual circumstances.</p>
+                  <p>Take time to analyze both the financial and non-financial aspects of each option. Consider consulting with a financial advisor who can help you evaluate the long-term implications of your housing decision based on your specific situation.</p>
+                  <p>Remember that your housing needs will likely change throughout your life, and what makes sense today might not be the right choice in five or ten years. The key is making an informed decision that supports your current needs while aligning with your long-term financial goals.</p>
+                `
+            },
+            4: {
+                title: "Top 10 Apps to Helps You Save Money in 2025",
+                author: "Alex Rivera",
+                date: "May 5, 2025",
+                category: "Technology",
+                content: ` 
+                  <p>In today's digital age, your smartphone can be one of your most powerful tools for managing finances and finding savings opportunities. With the right apps, you can automate savings, track expenses, find deals, and make smarter financial decisions with minimal effort.</p>
+
+                  <p>Here's our roundup of the top 10 money-saving apps that are making waves in 2025:</p>
+
+                  <h3>1. Expense Tracker Pro</h3>
+                  <p>Our own Expense Tracker app has evolved into a comprehensive financial management tool that helps you visualize spending patterns, set budgets, and identify areas where you can cut back. The Pro version now includes AI-powered insights that predict future expenses and suggest personalized saving opportunities.</p>
+                  <p><strong>Best for:</strong> Comprehensive expense tracking and budget management</p>
+
+                  <h3>2. RoundUp</h3>
+                  <p>This micro-saving app rounds up your purchases to the nearest dollar and invests the difference. The latest version includes themed investment portfolios aligned with your values, from sustainable energy to education technology.</p>
+                  <p><strong>Best for:</strong> Painless saving and investing without changing your spending habits</p>
+
+                  <h3>3. BillSlasher</h3>
+                  <p>This AI-powered negotiation assistant analyzes your recurring bills (cable, internet, phone, insurance) and either negotiates better rates on your behalf or suggests comparable alternatives at lower prices. Users report average savings of $350 annually.</p>
+                  <p><strong>Best for:</strong> Reducing monthly bills without the hassle of negotiating yourself</p>
+
+                  <h3>4. GrocerySaver</h3>
+                  <p>This app combines local grocery store flyers, digital coupons, and cashback offers in one place. Its meal planning feature suggests recipes based on sale items, helping you save on groceries while reducing food waste.</p>
+                  <p><strong>Best for:</strong> Maximizing grocery savings without extreme couponing</p>
+
+                  <h3>5. CommuteCash</h3>
+                  <p>This innovative app rewards sustainable commuting choices. Walk, bike, carpool, or use public transit to earn points redeemable for gift cards, transit passes, or cash. Some employers now offer bonus incentives through the platform.</p>
+                  <p><strong>Best for:</strong> Saving on transportation costs while reducing your carbon footprint</p>
+
+                  <h3>6. SubscriptionManager</h3>
+                  <p>This app identifies all your subscriptions across multiple payment methods and helps you cancel unused services with a single tap. It also highlights overlapping services and negotiates better rates on subscriptions you want to keep.</p>
+                  <p><strong>Best for:</strong> Eliminating subscription waste and preventing "forgotten" recurring charges</p>
+
+                  <h3>7. CashbackMaximizer</h3>
+                  <p>This app aggregates cashback offers across multiple platforms and automatically applies the best available deal when you shop online. It also stacks cashback with coupon codes and credit card rewards for maximum savings.</p>
+                  <p><strong>Best for:</strong> Maximizing returns on online shopping without managing multiple cashback accounts</p>
+
+                  <h3>8. EnergyMinimizer</h3>
+                  <p>Connect this app to your smart home devices to receive personalized recommendations for reducing energy consumption. It analyzes your usage patterns and can automatically adjust settings to save electricity during peak pricing periods.</p>
+                  <p><strong>Best for:</strong> Reducing utility bills through smarter energy usage</p>
+        
+                  <h3>9. SecondhandScout</h3>
+                  <p>This app searches multiple secondhand marketplaces (eBay, Facebook Marketplace, Poshmark, etc.) to find the best deals on items you're looking for. Set alerts for specific items and receive notifications when they become available at your target price.</p>
+                  <p><strong>Best for:</strong> Saving money by buying quality used items instead of new</p>
+        
+                  <h3>10. LoyaltyWallet</h3>
+                  <p>This app centralizes all your loyalty programs and points in one place, tracks expiration dates, and suggests optimal redemption strategies. It also identifies opportunities to earn bonus points through special promotions or partner offers.</p>
+                  <p><strong>Best for:</strong> Maximizing value from loyalty programs without keeping track of multiple accounts</p>
+
+                  <h3>How to Choose the Right Apps for You</h3>
+                  <p>While all these apps offer valuable money-saving features, trying to use too many simultaneously can become overwhelming. Consider your financial goals and pain points to select 2-3 apps that address your specific needs:</p>
+                  <ul>
+                    <li>If you struggle with budgeting and overspending, prioritize Expense Tracker Pro</li>
+                    <li>If saving consistently is your challenge, RoundUp might be your best starting point</li>
+                    <li>If you're already budget-conscious but want to maximize deals, focus on CashbackMaximizer or GrocerySaver</li>
+                  </ul>
+
+                  <h3>Privacy Considerations</h3>
+                  <p>When using financial apps, always review privacy policies and security features. Look for apps that use bank-level encryption, don't sell your personal data, and allow you to control what information is shared. Remember that convenience sometimes comes with privacy trade-offs, so choose apps that align with your comfort level regarding data sharing.</p>
+        
+                  <h3>Conclusion</h3>
+                  <p>The right combination of money-saving apps can help you build better financial habits, identify savings opportunities, and make your money work harder for you. By leveraging technology to automate and optimize your finances, you can achieve your financial goals faster without spending hours managing your money manually.</p>
+                  <p>What are your favorite money-saving apps? Share your experiences in the comments below!</p>
+                `
+            },
+            5: {
+                title: "Investing for Beginners: Start Growing Your Wealth Today",
+                author: "Priya Patel",
+                date: "April 28, 2025",
+                category: "Investing",
+                content: ` 
+                  <p>Investing can seem intimidating if you're just getting started, but it doesn't have to be. With a solid understanding of the basics and a strategic approach, anyone can begin building wealth through investments—even with a modest amount of money.</p>
+
+                  <p>This guide will walk you through the essential steps to start your investing journey with confidence.</p>
+
+                  <h3>Why Start Investing Now?</h3>
+                  <p>The most powerful advantage any investor has is time. Thanks to compound interest—what Einstein allegedly called the "eighth wonder of the world"—even small investments can grow significantly over decades.</p>
+                  <p>For example, if you invest $100 monthly with an average annual return of 7%, you'll have:</p>
+                  <ul>
+                    <li>After 10 years: ~$17,300 (your contribution: $12,000)</li>
+                    <li>After 20 years: ~$52,000 (your contribution: $24,000)</li>
+                    <li>After 30 years: ~$122,700 (your contribution: $36,000)</li>
+                  </ul>
+                  <p>The earlier you start, the more your money works for you rather than you working for your money.</p>
+
+                  <h3>Step 1: Set Clear Financial Goals</h3>
+                  <p>Before investing a single dollar, define what you're investing for:</p>
+                  <ul>
+                    <li><strong>Retirement:</strong> The most common long-term investment goal</li>
+                    <li><strong>Major purchase:</strong> Home down payment, education, etc.</li>
+                    <li><strong>Financial independence:</strong> Building wealth to have more choices</li>
+                    <li><strong>Legacy:</strong> Creating wealth to pass on to future generations</li>
+                  </ul>
+                  <p>Your goals will determine your investment timeline, risk tolerance, and appropriate investment vehicles.</p>
+
+                  <h3>Step 2: Create a Solid Financial Foundation</h3>
+                  <p>Before diving into investments, ensure you have:</p>
+                  <ul>
+                    <li>An emergency fund covering 3-6 months of essential expenses</li>
+                    <li>No high-interest debt (like credit cards)</li>
+                    <li>A budget that allows for consistent investing</li>
+                  </ul>
+                  <p>Investing shouldn't come at the expense of financial stability. Use your Expense Tracker app to ensure you're allocating funds appropriately.</p>
+
+                  <h3>Step 3: Understand Investment Vehicles</h3>
+                  <p>Here are the most common investment options for beginners:</p>
+        
+                  <h3>Retirement Accounts</h3>
+                  <p><strong>401(k)/403(b):</strong> Employer-sponsored retirement plans that often include matching contributions (free money!). Contributions are typically pre-tax, reducing your current tax burden.</p>
+                  <p><strong>IRA (Individual Retirement Account):</strong> Personal retirement accounts that come in two main varieties:</p>
+                  <ul>
+                    <li><strong>Traditional IRA:</strong> Tax-deductible contributions with taxes paid upon withdrawal</li>
+                    <li><strong>Roth IRA:</strong> After-tax contributions with tax-free growth and withdrawals</li>
+                  </ul>
+
+                  <h3>Investment Types</h3>
+                  <p><strong>Index Funds:</strong> Collections of stocks or bonds that track a specific market index (like the S&P 500). They offer instant diversification, low fees, and historically reliable returns.</p>
+                  <p><strong>ETFs (Exchange-Traded Funds):</strong> Similar to index funds but traded like stocks throughout the day. They offer flexibility, tax efficiency, and often have lower minimum investments.</p>
+                  <p><strong>Mutual Funds:</strong> Professionally managed collections of stocks, bonds, or other securities. They offer diversification but typically have higher fees than index funds.</p>
+                  <p><strong>Individual Stocks:</strong> Shares of ownership in specific companies. They offer potential for high returns but come with higher risk and require more research.</p>
+                  <p><strong>Bonds:</strong> Loans to governments or corporations that pay regular interest. They generally offer lower returns but higher stability than stocks.</p>
+
+                  <h3>Step 4: Determine Your Asset Allocation</h3>
+                  <p>Asset allocation—how you divide your investments among stocks, bonds, and other assets—is one of the most important factors in your investment success.</p>
+                  <p>A common rule of thumb is to subtract your age from 110 to determine your stock percentage. For example, if you're 30, you might aim for 80% stocks and 20% bonds. This balances growth potential with stability.</p>
+                  <p>However, your personal risk tolerance and goals should influence this decision. If market volatility keeps you up at night, a more conservative allocation might be appropriate.</p>
+
+                  <h3>Step 5: Choose a Platform and Start Investing</h3>
+                  <p>Several user-friendly platforms make investing accessible to beginners:</p>
+                  <ul>
+                    <li><strong>Robo-advisors:</strong> Automated platforms that create and manage a diversified portfolio based on your goals and risk tolerance. Examples include Betterment, Wealthfront, and Vanguard Digital Advisor.</li>
+                    <li><strong>Brokerage accounts:</strong> Traditional platforms that offer more control over your investments. Popular options include Fidelity, Charles Schwab, and Vanguard.</li>
+                    <li><strong>Micro-investing apps:</strong> Platforms that allow you to start with very small amounts, often by rounding up purchases. Examples include Acorns and Stash.</li>
+                  </ul>
+                  <p>When choosing a platform, consider fees, minimum investment requirements, available investment options, and educational resources.</p>
+
+                  <h3>Step 6: Implement a Consistent Investment Strategy</h3>
+                  <p>For most beginners, dollar-cost averaging is the most effective strategy:</p>
+                  <ol>
+                    <li>Decide how much you can invest regularly (monthly or with each paycheck)</li>
+                    <li>Set up automatic transfers to your investment account</li>
+                    <li>Invest according to your predetermined asset allocation</li>
+                    <li>Rebalance your portfolio annually to maintain your target allocation</li>
+                  </ol>
+                  <p>This approach removes emotion from investing and helps you avoid the pitfalls of trying to time the market.</p>
+
+                  <h3>Common Beginner Mistakes to Avoid</h3>
+                  <ul>
+                   <li><strong>Trying to time the market:</strong> Even professional investors rarely succeed at this consistently.</li>
+                   <li><strong>Checking your investments daily:</strong> This can lead to emotional decisions based on short-term fluctuations.</li>
+                   <li><strong>Investing in things you don't understand:</strong> If you can't explain how an investment works, it's probably not right for you yet.</li>
+                   <li><strong>Neglecting fees:</strong> High fees can significantly reduce your returns over time.</li>
+                   <li><strong>Failing to diversify:</strong> Putting too much money in a single company or sector increases your risk.</li>
+                 </ul>
+        
+                 <h3>Conclusion</h3>
+                 <p>Investing isn't about getting rich quickly—it's about building wealth consistently over time. By starting with clear goals, understanding basic investment principles, and implementing a disciplined strategy, you can begin growing your wealth regardless of your current financial situation.</p>
+                 <p>Remember that investing is a marathon, not a sprint. Stay focused on your long-term goals, continue educating yourself, and adjust your strategy as your life circumstances change.</p>
+                 <p>The best time to start investing was 20 years ago. The second best time is today.</p>
+                `
+            },
+            6: {
+                title: "Smart Shopping: How to Save Money on Everyday Purchases",
+                author: "Emma Wilson",
+                date: "April 20, 2025",
+                category: "Shopping",
+                content: ` 
+                <p>In an era of rising costs, finding ways to save on everyday purchases isn't just nice—it's necessary. The good news is that with some strategic planning and smart shopping habits, you can significantly reduce your spending without sacrificing quality or convenience.</p>
+        
+                <p>This guide explores practical strategies to help you save money on groceries, household items, clothing, and other essentials.</p>
+        
+                <h3>Grocery Shopping Strategies</h3>
+        
+                <h3>1. Plan Meals Around Sales</h3>
+                <p>Instead of deciding what to eat and then shopping for ingredients, flip the process:</p>
+                <ul>
+                 <li>Check weekly store flyers or apps for sales on protein and produce</li>
+                 <li>Plan your meals around these discounted items</li>
+                 <li>Build a shopping list based on your meal plan</li>
+               </ul>
+               <p>This approach can reduce your grocery bill by 20-30% without compromising on nutrition or variety.</p>
+        
+               <h3>2. Strategic Store Selection</h3>
+               <p>Different stores offer better values on different categories:</p>
+               <ul>
+                 <li><strong>Discount grocers</strong> (like Aldi or Lidl) for staples and basics</li>
+                 <li><strong>Warehouse clubs</strong> for bulk items you use regularly</li>
+                 <li><strong>Farmers markets</strong> (especially near closing time) for fresh, local produce</li>
+                 <li><strong>Ethnic grocery stores</strong> for spices, specialty ingredients, and produce</li>
+               </ul>
+               <p>You don't need to visit multiple stores each week—rotate between them based on your needs and sales cycles.</p>
+        
+               <h3>3. Embrace Store Brands</h3>
+               <p>Store brands (also called private labels) have dramatically improved in quality while remaining 20-30% cheaper than national brands. Consider this approach:</p>
+               <ul>
+                 <li>Try store brand versions of simple products first (flour, sugar, canned vegetables)</li>
+                 <li>For each successful switch, you've created a permanent savings</li>
+                 <li>Keep national brands for the few items where you notice a significant difference</li>
+               </ul>
+               <p>In blind taste tests, consumers often prefer store brands or can't tell the difference for many products.</p>
+        
+               <h3>4. Reduce Food Waste</h3>
+               <p>The average household wastes approximately 30% of the food they purchase. Track your food waste for two weeks using your Expense Tracker app to identify patterns, then:</p>
+               <ul>
+                 <li>Buy smaller quantities of perishables</li>
+                 <li>Implement a "use it up" day each week to cook with ingredients that need to be used</li>
+                 <li>Properly store foods to maximize freshness</li>
+                 <li>Freeze items before they spoil</li>
+               </ul>
+        
+               <h3>Clothing and Personal Items</h3>
+        
+               <h3>1. The 30-Wear Test</h3>
+                 <p>Before purchasing any clothing item, ask yourself: "Will I wear this at least 30 times?" This simple question helps distinguish between lasting additions to your wardrobe and impulse purchases.</p>
+                 <p>For special occasion items you'll wear less frequently, consider:</p>
+               <ul>
+                 <li>Clothing rental services</li>
+                 <li>Borrowing from friends or family</li>
+                 <li>Consignment or secondhand shops</li>
+               </ul>
+        
+               <h3>2. Strategic Timing for Purchases</h3>
+               <p>Retail follows predictable sales cycles. Time your purchases accordingly:</p>
+               <ul>
+                 <li><strong>Winter clothing:</strong> Best deals in January/February</li>
+                 <li><strong>Summer clothing:</strong> Best deals in August/September</li>
+                 <li><strong>Electronics:</strong> November (Black Friday) and Amazon Prime Day</li>
+                 <li><strong>Furniture:</strong> January/July (when new inventory arrives)</li>
+                 <li><strong>Appliances:</strong> Holiday weekends and end of month</li>
+               </ul>
+               <p>Create a "to buy" list in your Expense Tracker app and wait for the optimal time to make larger purchases.</p>
+        
+               <h3>3. Quality Over Quantity</h3>
+               <p>For items you use daily, investing in quality often saves money long-term:</p>
+               <ul>
+                 <li>A $150 pair of well-made shoes that lasts 5 years is cheaper than five $50 pairs that each last one year</li>
+                 <li>Higher-quality kitchen tools, appliances, and furniture typically offer better value over time</li>
+               </ul>
+               <p>Research brands known for durability and check warranty terms before purchasing.</p>
+        
+               <h3>Household Items and Services</h3>
+        
+               <h3>1. Subscription Audit</h3>
+               <p>Use your Expense Tracker app to identify all subscriptions and recurring charges, then:</p>
+               <ul>
+                 <li>Cancel unused or rarely used services</li>
+                 <li>Downgrade plans where you're paying for features you don't use</li>
+                 <li>Share family plans where appropriate (streaming services, cloud storage)</li>
+                 <li>Rotate subscriptions instead of maintaining multiple similar services</li>
+               </ul>
+        
+               <h3>2. DIY Cleaning Products</h3>
+               <p>Basic cleaning supplies can be made for a fraction of the cost of commercial products:</p>
+               <ul>
+                 <li><strong>All-purpose cleaner:</strong> Equal parts water and white vinegar with a few drops of essential oil</li>
+                 <li><strong>Glass cleaner:</strong> 1 part vinegar to 4 parts water</li>
+                 <li><strong>Furniture polish:</strong> 1 part lemon juice to 2 parts olive oil</li>
+               </ul>
+               <p>These alternatives are not only cheaper but also more environmentally friendly.</p>
+        
+               <h3>3. Energy Efficiency</h3>
+               <p>Small changes in energy usage can add up to significant savings:</p>
+               <ul>
+                 <li>Replace incandescent bulbs with LEDs</li>
+                 <li>Use smart power strips for electronics that draw phantom power</li>
+                 <li>Install a programmable thermostat</li>
+                 <li>Wash clothes in cold water when possible</li>
+                 <li>Air dry dishes and clothes when practical</li>
+               </ul>
+               <p>Track your utility bills in your Expense Tracker app to measure the impact of these changes.</p>
+        
+               <h3>Smart Shopping Technology</h3>
+        
+               <h3>1. Price Tracking Tools</h3>
+               <p>For online shopping, use price tracking extensions like Honey, CamelCamelCamel, or Keepa to:</p>
+               <ul>
+                  <li>View price history to determine if current prices are high or low</li>
+                  <li>Set alerts for price drops on specific items</li>
+                  <li>Automatically apply coupon codes at checkout</li>
+               </ul>
+        
+               <h3>2. Cashback and Rewards</h3>
+               <p>Layer multiple rewards programs for maximum savings:</p>
+               <ul>
+                 <li>Shop through cashback portals (Rakuten, TopCashback)</li>
+                 <li>Use a rewards credit card (if you pay the balance in full each month)</li>
+                 <li>Participate in store loyalty programs</li>
+                 <li>Use receipt scanning apps (Fetch Rewards, Ibotta)</li>
+               </ul>
+               <p>These programs can be combined to save 5-20% on many purchases.</p>
+        
+               <h3>3. Buy Nothing Groups</h3>
+               <p>Local Buy Nothing groups on social media platforms allow community members to give away items they no longer need. Before purchasing something you'll use infrequently, check if it's available in your local group.</p>
+        
+              <h3>Psychological Strategies</h3>
+        
+              <h3>1. The 24-Hour Rule</h3>
+              <p>For non-essential purchases over a certain amount (you decide the threshold), wait 24 hours before buying. This cooling-off period helps distinguish between wants and needs, often preventing impulse purchases.</p>
+        
+              <h3>2. Cash Envelopes for Problem Categories</h3>
+              <p>If you consistently overspend in certain categories (dining out, clothing, entertainment), consider using cash envelopes for these expenses. When the cash is gone, you're done spending in that category until the next budget period.</p>
+        
+              <h3>3. Focus on Value, Not Just Price</h3>
+              <p>The cheapest option isn't always the most economical. Consider:</p>
+              <ul>
+                 <li>Cost per use or serving</li>
+                 <li>Time saved by more efficient products</li>
+                 <li>Durability and expected lifespan</li>
+                 <li>Maintenance requirements and costs</li>
+              </ul>
+        
+              <h3>Conclusion</h3>
+              <p>Smart shopping isn't about extreme frugality or sacrificing quality of life—it's about being intentional with your spending and maximizing the value of each dollar. By implementing even a few of these strategies, you can significantly reduce your expenses on everyday purchases.</p>
+              <p>The key is consistency. Small savings across multiple categories add up to substantial amounts over time. Use your Expense Tracker app to monitor your progress and celebrate your savings milestones.</p>
+              <p>What are your favorite money-saving shopping strategies? Share your tips in the comments below!</p>
+                `
+            }
+        };
+
+        //Add click event to blog cards
+        blogCards.forEach(card => {
+          card.addEventListener('click', function() {
+            const blogId = this.getAttribute('data-blog-id');
+            showBlogPost(blogId);
+          });
+        });
+
+        //Back to Blogs Button
+        backToBlogsBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            blogPostView.style.display = 'none';
+            blogListView.style.display = 'block';
+        });
+
+        //function to show blog post
+        function showBlogPost(id) {
+            const post = blogPosts[id];
+
+            if (!post) {
+              showToast('Blog post not found');
+              return;
+            }
+
+            const blogPostTitle = document.querySelector('.blog-post-title');
+            const blogPostMeta = document.querySelector('.blog-post-meta');
+            const blogPostContent = document.querySelector('.blog-post-content');
+
+            blogPostTitle.textContent = post.title;
+            blogPostMeta.innerHTML = `
+            <span>By ${post.author}</span>
+            <span>${post.date}</span>
+            `;
+            blogPostContent.innerHTML = post.content;
+
+            //show blog post view 
+            blogListView.style.display = 'none';
+            blogPostView.style.display = 'block';
+    
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Toast notification function
+        function showToast(message, duration = 3000) {
+          const toast = document.getElementById('toast');
+          if (!toast) return;
+    
+          toast.textContent = message;
+          toast.classList.add('show');
+    
+          setTimeout(() => {
+            toast.classList.remove('show');
+          }, duration);
+        }
+     });
+  </script>
+  
+</body>
+</html>
